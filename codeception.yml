@@ -14,9 +14,9 @@ modules:
             configFile: 'config/test.php'
     enabled:
         - Db:
-            dsn: 'pgsql:host=localhost;dbname=todos_test'
-            user: 'todos'
-            password: 'todos'
+            dsn: 'pgsql:host=localhost;dbname=todo_test'
+            user: 'todo'
+            password: 'todo'
 
 # To enable code coverage:
 #coverage:

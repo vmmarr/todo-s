@@ -8,6 +8,7 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'name' => "TODO's",
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -16,13 +17,13 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 's0O_fG17Fwb8vinGYa7zTdkt29aLrrRc',
+            'cookieValidationKey' => 'KamNsy6WDToF7W3MF-wPkA1Xbvda9cEU',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\Usuarios',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -69,6 +70,13 @@ $config = [
         ],
     ],
     'params' => $params,
+    'modules' => [
+        'datecontrol' =>  [
+            'class' => kartik\datecontrol\Module::class,
+            'displayTimezone' => 'Europe/Madrid',
+            'saveTimezone' => 'UTC',
+        ],
+    ],
 ];
 
 if (YII_ENV_DEV) {
