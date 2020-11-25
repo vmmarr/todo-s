@@ -42,7 +42,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Inicio', 'url' => ['/tareas/index'], 'visible' => !Yii::$app->user->isGuest],
-            ['label' => 'Etiquetas', 'url' => ['/etiquetas/index']],
+            ['label' => 'Etiquetas', 'url' => ['/etiquetas/index'], 'visible' => !Yii::$app->user->isGuest],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
