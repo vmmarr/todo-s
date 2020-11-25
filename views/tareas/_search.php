@@ -1,5 +1,6 @@
 <?php
 
+use kartik\date\DatePicker;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
 
@@ -18,21 +19,13 @@ use yii\bootstrap4\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'vencimiento')->widget(DatePicker::class, [
+    ])?>
 
-    <?= $form->field($model, 'titulo') ?>
-
-    <?= $form->field($model, 'descripcion') ?>
-
-    <?= $form->field($model, 'usuario_id') ?>
-
-    <?= $form->field($model, 'vencimiento') ?>
-
-    <?php // echo $form->field($model, 'esrealizada')->checkbox() ?>
+    <?=$form->field($model, 'esrealizada')->checkbox()?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton('Buscar', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

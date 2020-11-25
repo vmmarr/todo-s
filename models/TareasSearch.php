@@ -65,8 +65,7 @@ class TareasSearch extends Tareas
             'esrealizada' => $this->esrealizada,
         ]);
 
-        $query->andFilterWhere(['ilike', 'titulo', $this->titulo])
-            ->andFilterWhere(['ilike', 'descripcion', $this->descripcion]);
+        $query->andFilterWhere(['ilike', 'titulo', $this->titulo]);
 
         return $dataProvider;
     }

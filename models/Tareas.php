@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use DateTime;
 use Yii;
 
 /**
@@ -37,7 +36,8 @@ class Tareas extends \yii\db\ActiveRecord
             [['titulo', 'descripcion', 'usuario_id', 'vencimiento'], 'required'],
             [['usuario_id'], 'default', 'value' => null],
             [['usuario_id'], 'integer'],
-            [['vencimiento'], 'safe'],
+            [['vencimiento'], 'date', 'format' => 'dd/mm/yyyy'],
+            [['vencimiento'], 'validarFecha'],
             [['esrealizada'], 'boolean'],
             [['titulo'], 'string', 'max' => 255],
             [['descripcion'], 'string', 'max' => 100],
@@ -82,12 +82,9 @@ class Tareas extends \yii\db\ActiveRecord
 
     public function validarFecha($fecha)
     {
-        $ahora = new DateTime();
-        $vencimiento = new DateTime($fecha);
-        if ($ahora < $vencimiento) {
-            return false;
-        } else {
-            return true;
+        $ahora = date('d-m-y');
+        if (strtotime($this->vencimiento) < strtotime(date('Y-m-d'))) {
+            $this->addError($fecha, 'No puede ser menor que hoy');
         }
     }
 }

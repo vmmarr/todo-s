@@ -14,9 +14,7 @@ use yii\bootstrap4\ActiveForm;
 <div class="tareas-form">
 
     <?php 
-    $form = ActiveForm::begin([
-        'enableAjaxValidation' => true,
-    ]); ?>
+    $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'titulo')->textInput(['maxlength' => true]) ?>
 
@@ -24,9 +22,11 @@ use yii\bootstrap4\ActiveForm;
 
     <?= $form->field($model, 'usuario_id')->textInput()->hiddenInput(['value' => Yii::$app->user->id])->label(false); ?>
 
-    <?= $form->field($model, 'vencimiento')->widget(DateControl::classname(), [
-        'type'=>DateControl::FORMAT_DATE,
-        'autoWidget' => true,
+    <?= $form->field($model, 'vencimiento')->widget(DatePicker::classname(), [
+        'options' => [
+            'value' => date('d/m/Y'),
+            'startDate' => date('d/m/Y'),
+        ]
     ]) ?>
 
     <div class="form-group">
