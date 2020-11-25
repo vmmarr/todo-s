@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row d-flex justify-content-center">
     <?php
         foreach ($dataProvider->getModels() as $fila) : ?>   
-            <div class="col-2">
+            <div class="col-sm-4 col-md-3 col-lg-2">
                 <div class="card">
                     <?=Html::tag('p', $fila['etiqueta'], ['class' => 'text-center mb-0'])?>
                 </div>
