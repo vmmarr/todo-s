@@ -35,7 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?=Html::tag('h5', $fila['titulo'], ['class' => 'card-title'])?>
                         <?=Html::tag('p', $fila['descripcion'], ['class' => 'card-text'])?>
                         <?=Html::tag('p', $fila['vencimiento'], ['class' => 'card-text'])?>
-                        <?=Html::a(Icon::show('check-square', ['framework' => Icon::FA]), ['update', 'id' => $fila['id']])?>
                         <?=Html::a(Icon::show('trash', ['framework' => Icon::FA]), ['delete', 'id' => $fila['id']], [
                             'class' => 'dropdown-item',
                             'data' => [

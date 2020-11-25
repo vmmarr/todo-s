@@ -122,15 +122,6 @@ class TareasController extends Controller
         }
     }
 
-    public function actionRealizada($id)
-    {
-        $model = $this->findModel($id);
-        $model->esrealizada = true;
-        if ($model->save()) {
-            return $this->redirect(['index']);
-        }
-    }
-
     /**
      * Finds the Tareas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
