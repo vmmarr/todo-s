@@ -67,7 +67,7 @@ class EtiquetasController extends Controller
         $model = new Etiquetas();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [

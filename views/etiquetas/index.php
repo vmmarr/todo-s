@@ -19,16 +19,18 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            'id',
-            'etiqueta',
-        ],
-    ]); ?>
+    <div class="row d-flex justify-content-center">
+    <?php
+        foreach ($dataProvider->getModels() as $fila) : ?>   
+            <div class="col-2">
+                <div class="card">
+                    <?=Html::tag('p', $fila['etiqueta'], ['class' => 'text-center mb-0'])?>
+                </div>
+            </div>
+    <?php 
+        endforeach;?>
 
     <?php Pjax::end(); ?>
 
