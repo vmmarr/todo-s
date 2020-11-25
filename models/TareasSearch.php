@@ -5,6 +5,7 @@ namespace app\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Tareas;
+use Yii;
 
 /**
  * TareasSearch represents the model behind the search form of `app\models\Tareas`.
@@ -49,7 +50,11 @@ class TareasSearch extends Tareas
      */
     public function search($params)
     {
-        $query = Tareas::find();
+        if (Yii::$app->user->id !== 1) {
+            $query = Tareas::find()->where(['usuario_id' => Yii::$app->user->id]);
+        } else {
+            $query = Tareas::find();
+        }
 
         // add conditions that should always apply here
 

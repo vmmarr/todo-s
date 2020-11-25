@@ -38,7 +38,7 @@ class TareasController extends Controller
     public function actionIndex()
     {
         $searchModel = new TareasSearch();
-        $searchModel->find()->where(['usuario_id' => Yii::$app->user->identity->id]);
+        //$searchModel->find()->where(['usuario_id' => Yii::$app->user->identity->id]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         if (!Yii::$app->user->isGuest) {

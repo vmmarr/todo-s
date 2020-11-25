@@ -28,11 +28,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row d-flex justify-content-center align-items-center">
     <?php
         foreach ($dataProvider->getModels() as $fila) : ?>   
-            
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <?=Html::tag('h5', $fila['titulo'], ['class' => 'card-title'])?>
+                        <?=Html::tag('h3', $fila['titulo'], ['class' => 'card-title'])?>
+                        <?php
+                            if(Yii::$app->user->identity->id ===1) {?>
+                                <?=Html::tag('h6', $fila->usuario->username, ['class' => 'card-subtitle mb-2 text-muted'])?>
+                        <?php } ?>
                         <?=Html::tag('p', $fila['descripcion'], ['class' => 'card-text'])?>
                         <?=Html::tag('p', $fila['vencimiento'], ['class' => 'card-text'])?>
                         <?=Html::a(Icon::show('trash', ['framework' => Icon::FA]), ['delete', 'id' => $fila['id']], [
