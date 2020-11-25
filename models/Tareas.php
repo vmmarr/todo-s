@@ -36,7 +36,7 @@ class Tareas extends \yii\db\ActiveRecord
             [['titulo', 'descripcion', 'usuario_id', 'vencimiento'], 'required'],
             [['usuario_id'], 'default', 'value' => null],
             [['usuario_id'], 'integer'],
-            [['vencimiento'], 'date', 'format' => 'dd/mm/yyyy'],
+            //[['vencimiento'], 'date', 'format' => 'yyyy-mm-dd'],
             [['vencimiento'], 'validarFecha'],
             [['esrealizada'], 'boolean'],
             [['titulo'], 'string', 'max' => 255],
@@ -82,7 +82,6 @@ class Tareas extends \yii\db\ActiveRecord
 
     public function validarFecha($fecha)
     {
-        $ahora = date('d-m-y');
         if (strtotime($this->vencimiento) < strtotime(date('Y-m-d'))) {
             $this->addError($fecha, 'No puede ser menor que hoy');
         }

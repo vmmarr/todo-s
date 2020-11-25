@@ -24,8 +24,11 @@ use yii\bootstrap4\ActiveForm;
 
     <?= $form->field($model, 'vencimiento')->widget(DatePicker::classname(), [
         'options' => [
-            'value' => date('d/m/Y'),
-            'startDate' => date('d/m/Y'),
+            'value' => date('Y-m-d'),
+            'startDate' => date('Y-m-d'),
+        ],
+        'pluginOptions' => [
+            'format' => 'yyyy-mm-dd',
         ]
     ]) ?>
 

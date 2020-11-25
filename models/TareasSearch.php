@@ -18,7 +18,8 @@ class TareasSearch extends Tareas
     {
         return [
             [['id', 'usuario_id'], 'integer'],
-            [['titulo', 'descripcion', 'vencimiento'], 'safe'],
+            [['titulo', 'descripcion'], 'safe'],
+            [['vencimiento'], 'validarFecha'],
             [['esrealizada'], 'boolean'],
         ];
     }
@@ -30,6 +31,13 @@ class TareasSearch extends Tareas
     {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
+    }
+
+    public function validarFecha($fecha)
+    {
+        if (strtotime($this->vencimiento) < strtotime(date('Y-m-d'))) {
+            $this->addError($fecha, 'No puede ser menor que hoy');
+        }
     }
 
     /**

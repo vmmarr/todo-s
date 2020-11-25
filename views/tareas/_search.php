@@ -20,6 +20,9 @@ use yii\bootstrap4\ActiveForm;
     ]); ?>
 
     <?= $form->field($model, 'vencimiento')->widget(DatePicker::class, [
+        'pluginOptions' => [
+            'format' => 'yyyy-mm-dd',
+        ]
     ])?>
 
     <?=$form->field($model, 'esrealizada')->checkbox()?>
