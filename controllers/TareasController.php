@@ -38,12 +38,17 @@ class TareasController extends Controller
     public function actionIndex()
     {
         $searchModel = new TareasSearch();
+        $searchModel->find()->where(['usuario_id' => Yii::$app->user->identity->id]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        if (!Yii::$app->user->isGuest) {
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+                ]);
+        } else {
+            return $this->redirect(['/site/login']);
+        }
     }
 
     /**
@@ -69,9 +74,7 @@ class TareasController extends Controller
         $model = new Tareas();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if ($model->validarFecha($model->vencimiento)) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+                return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -108,9 +111,24 @@ class TareasController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $tarea = $this->findModel($id);
+        if (!$tarea->esrealizada) {
+            $tarea->delete();
+            Yii::$app->session->setFlash('success', 'Tarea borrada con éxito.');
+            return $this->redirect(['index']);
+        } else {
+            Yii::$app->session->setFlash('success', 'No puedes borrar una tarea realizada.');
+            return $this->redirect(['index']);
+        }
+    }
 
-        return $this->redirect(['index']);
+    public function actionRealizada($id)
+    {
+        $model = $this->findModel($id);
+        $model->esrealizada = true;
+        if ($model->save()) {
+            return $this->redirect(['index']);
+        }
     }
 
     /**

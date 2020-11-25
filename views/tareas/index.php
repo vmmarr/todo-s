@@ -1,7 +1,11 @@
 <?php
 
+use app\models\Tareas;
+use kartik\icons\Icon;
 use yii\bootstrap4\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
+use yii\widgets\ListView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\TareasSearch */
@@ -19,22 +23,32 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            'id',
-            'titulo',
-            'descripcion',
-            'usuario_id',
-            'vencimiento',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
+    <div class="row d-flex justify-content-center align-items-center">
+    <?php
+        foreach ($dataProvider->getModels() as $fila) : ?>   
+            
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <?=Html::tag('h5', $fila['titulo'], ['class' => 'card-title'])?>
+                        <?=Html::tag('p', $fila['descripcion'], ['class' => 'card-text'])?>
+                        <?=Html::tag('p', $fila['vencimiento'], ['class' => 'card-text'])?>
+                        <?=Html::a(Icon::show('check-square', ['framework' => Icon::FA]), ['update', 'id' => $fila['id']])?>
+                        <?=Html::a(Icon::show('trash', ['framework' => Icon::FA]), ['delete', 'id' => $fila['id']], [
+                            'class' => 'dropdown-item',
+                            'data' => [
+                                'confirm' => '¿Eliminar tarea?',
+                                'method' => 'post',
+                            ],
+                        ])?>
+                    </div>
+                </div>
+            </div>
+    <?php 
+        endforeach;?>
+</div>
     <?php Pjax::end(); ?>
-
+    
 </div>
